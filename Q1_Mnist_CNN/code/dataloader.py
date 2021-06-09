@@ -5,12 +5,15 @@ and transforming it.
 
 import torchvision
 import torchvision.transforms as transforms
+from torchvision import datasets
 import torch
 
-trainset = torchvision.datasets.FashionMNIST(root="./../data", train=True, download=True, transform = transforms.ToTensor())
-testset = torchvision.datasets.FashionMNIST(root="./.../data", train=False, download=True, transform = transforms.ToTensor())
 
-trainloader = torch.utils.data.DataLoader(trainset, batch_size=4, shuffle=True)
-testloader = torch.utils.data.DataLoader(testset, batch_size=4, shuffle=False)
+def loadData(train_data_path: str, test_data_path: str) -> (object, object):
+    train_dataset = datasets.ImageFolder(train_data_path, transform=transforms.ToTensor())
+    test_dataset = datasets.ImageFolder(test_data_path, transform=transforms.ToTensor())
 
-# Put enforcer around data layer
+    train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=4, shuffle=True)
+    test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=4, shuffle=False)
+
+    return train_loader, test_loader
