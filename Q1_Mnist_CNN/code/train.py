@@ -3,7 +3,7 @@ Primary training script
 """
 
 from datetime import datetime
-from dataloader import *
+from dataloader import loadData
 import lenet
 import torch
 import torch.nn as nn
@@ -13,9 +13,12 @@ NUMBER_OF_CLASSES = 10
 RANDOM_SEED = 42
 LEARNING_RATE = 0.001
 BATCH_SIZE = 32
-N_EPOCHS = 15
-
+N_EPOCHS = 1
 IMG_SIZE = 32
+
+PATH = "../models/lenet_trained.pt"
+TRAIN_DATA_PATH = "../data/f_mnist_data/train"
+TEST_DATA_PATH = "../data/f_mnist_data/test"
 
 
 def detect_gpu():
@@ -27,7 +30,8 @@ def detect_gpu():
     return train_target
 
 
-def train(train_loader, model, criterion, optimizer, device):
+def train(train_loader: object, model: object, criterion: object, optimizer:object, device: str) -> \
+        (object, object, float):
     """
     Single loop step while training
     """
@@ -54,7 +58,7 @@ def train(train_loader, model, criterion, optimizer, device):
     return model, optimizer, epoch_loss
 
 
-def validate(valid_loader, model, criterion, device):
+def validate(valid_loader: object, model: object, criterion: object, device: str) -> (object, float):
     """
     Function for the validation step of the training loop
     """
@@ -76,7 +80,7 @@ def validate(valid_loader, model, criterion, device):
     return model, epoch_loss
 
 
-def get_accuracy(model, data_loader, device):
+def get_accuracy(model: object, data_loader: object, device: str) -> float:
     """
     Function for computing the accuracy of the predictions over the entire data_loader
     """
@@ -99,13 +103,13 @@ def get_accuracy(model, data_loader, device):
     return correct_pred.float() / n
 
 
-def training_loop(model, criterion, optimizer, train_loader, valid_loader, epochs, device, print_every=1):
+def training_loop(model: object, criterion: object, optimizer: object, train_loader: object, valid_loader: object,
+                  epochs: int, device: str, print_every=1) -> (object, object, ([float], [float])):
     """
     Function defining the entire training loop
     """
 
     # set objects for storing metrics
-    best_loss = 1e10
     train_losses = []
     valid_losses = []
 
@@ -136,8 +140,10 @@ def training_loop(model, criterion, optimizer, train_loader, valid_loader, epoch
 
 
 if __name__ == '__main__':
+    train_loader, test_loader = loadData(TRAIN_DATA_PATH, TEST_DATA_PATH)
     device = detect_gpu()
     net = lenet.LeNet(NUMBER_OF_CLASSES).to(device)
     loss_fn = nn.CrossEntropyLoss()
     opt = optim.Adam(net.parameters(), lr=LEARNING_RATE)
-    training_loop(net, loss_fn, opt, trainloader, testloader, N_EPOCHS, device)
+    trainedModel, _, _ = training_loop(net, loss_fn, opt, train_loader, test_loader, N_EPOCHS, device)
+    torch.save(trainedModel, PATH)
