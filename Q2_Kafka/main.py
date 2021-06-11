@@ -1,19 +1,48 @@
-from kafka_producer import MyKafkaProducer
-from gcp_publisher import MyPubSubProducer
+from service.producers.kafka_service import KafkaService as KProducer
+from service.consumers.kafka_service import KafkaService as KConsumer
 
-BOOTSTRAP_SERVER = 'localhost:9092'
-KAFKA_TOPIC = 'numtest'
+from service.producers.gcp_service import GCPService as GProducer
+from service.consumers.gcp_service import GCPService as GConsumer
+
+import sys
+
+BOOTSTRAP_SERVER = "localhost:9092"
+KAFKA_TOPIC = "numtest"
+
 GCP_PROJECT_ID = "silver-spark-316405"
 GCP_TOPIC = "sending_topic_1"
+GCP_SUBSCRIPTION_ID = "my-sub"
 
-choice = "GCP"
+choice = sys.argv[1]
+run_type = sys.argv[2]
 
-if choice == "KAFKA":
-    new_kafka_producer = MyKafkaProducer(BOOTSTRAP_SERVER)
-    new_kafka_producer.send_data(24123, KAFKA_TOPIC)
+if choice == "KAFKA" and run_type == "PRODUCER":
+    config = {"bootstrap_server": BOOTSTRAP_SERVER}
+    client = KProducer(config=config)
+    client.produce(24123, KAFKA_TOPIC)
 
-if choice == "GCP":
-    new_gcp_producer = MyPubSubProducer(GCP_PROJECT_ID)
-    new_gcp_producer.send_data(24123, GCP_TOPIC)
+if choice == "GCP" and run_type == "PRODUCER":
+    config = {"project_id": GCP_PROJECT_ID}
+    client = GProducer(config=config)
+    client.produce(24123, GCP_TOPIC)
 
+if choice == "KAFKA" and run_type == "CONSUMER":
+    kafka_config = {
+        "name": KAFKA_TOPIC,
+        "bootstrap_server": BOOTSTRAP_SERVER,
+        "auto_offset_reset": "earliest",
+        "enable_auto_commit": True,
+        "group_id": "counters",
+    }
+    client = KConsumer(config=config)
+    while 1:
+        client.consume()
 
+if choice == "GCP" and run_type == "CONSUMER":
+    gcp_config = {
+        "project_id": GCP_PROJECT_ID,
+        "subscription_id": GCP_SUBSCRIPTION_ID
+    }
+    client = GConsumer(config=gcp_config)
+    while 1:
+        client.consume()
