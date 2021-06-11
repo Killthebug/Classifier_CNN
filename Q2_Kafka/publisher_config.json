@@ -1,0 +1,12 @@
+{
+  "kafka": {
+    "bootstrap_server" : "",
+    "bootstrap_servers": "",
+    "auto_offset_reset": "",
+    "enable_auto_commit": "",
+    "group_id": ""
+  },
+  "gcp": {
+    "project_id": ""
+  }
+}
