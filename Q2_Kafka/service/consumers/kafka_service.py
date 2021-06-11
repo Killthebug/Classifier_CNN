@@ -4,6 +4,10 @@ import json
 
 
 class KafkaService(Consumer):
+    """
+    Consumer class to send messages over Kafka.
+    Inherits from parents Consumer class.
+    """
     def __init__(self, config=None):
         super().__init__()
         self.client = KafkaConsumer(
@@ -16,9 +20,16 @@ class KafkaService(Consumer):
         )
 
     @staticmethod
-    def value_deserializer(data):
+    def value_deserializer(data) -> json:
+        """
+        Helper method to assist in deserialization of recieved message
+        :param data: json
+        """
         return json.loads(data.decode("utf8"))
 
     def consume(self):
+        """
+        Function to enable consumer to pull stream of data from message queue
+        """
         for message in self.client:
             print(f"{message} added")
