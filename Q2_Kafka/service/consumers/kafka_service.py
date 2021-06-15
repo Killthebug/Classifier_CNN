@@ -24,5 +24,5 @@ class KafkaService(Consumer):
         Function to enable consumer to pull stream of data from message queue
         """
         for message in self.client:
-            print(f"{message} added")
+            # print(f"{message} added")
             return message

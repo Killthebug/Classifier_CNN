@@ -22,7 +22,5 @@ class KafkaService(Producer):
         :param topic:
         :return:
         """
-        data = {"number": data}
-        print(data)
         print(self.client.send(topic, value=data))
         time.sleep(1)
