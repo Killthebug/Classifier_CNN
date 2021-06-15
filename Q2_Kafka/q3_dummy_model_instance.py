@@ -25,7 +25,12 @@ def load_model(model_path: str) -> object:
     return model
 
 
-def inference_on_data(image):
+def inference_on_data(image) -> str:
+    """
+    Given image file predict and return class label
+    :param image:
+    :return:
+    """
     result = inference_model(image)
     class_label = torch.argmax(result[0])
     # Print to log acts as a proxy of saving to an actual DB
@@ -34,11 +39,20 @@ def inference_on_data(image):
 
 
 def publish_response(class_label):
+    """
+    Publish response to kafka topic
+    :param class_label:
+    :return:
+    """
     client = KProducer(config=publisher_config)
     client.produce(class_label, PUBLISHER_TOPIC)
 
 
 def enable_subscription():
+    """
+    Start Consuming data coming in as images from requesters
+    :return:
+    """
     client = KConsumer(config=subscriber_config)
     counter = 0
     while 1:
