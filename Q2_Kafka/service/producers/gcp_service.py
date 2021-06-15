@@ -11,15 +11,7 @@ class GCPService(Producer):
         super().__init__()
         self.project_id = config["project_id"]
         self.client = pubsub_v1.PublisherClient()
-
-    @staticmethod
-    def value_serializer(data) -> bytes:
-        """
-        Helper method to serialize data as bytes
-        :param data:
-        :return: json
-        """
-        return str(data).encode("utf-8")
+        self.value_serializer = config["value_serializer"]
 
     def produce(self, data, topic):
         """

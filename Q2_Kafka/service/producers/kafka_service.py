@@ -1,5 +1,4 @@
 import time
-import json
 from kafka import KafkaProducer
 from service.producers import Producer
 
@@ -13,17 +12,8 @@ class KafkaService(Producer):
         super().__init__()
         self.client = KafkaProducer(
             bootstrap_servers=config["bootstrap_server"],
-            value_serializer=self.value_serializer,
+            value_serializer=config["value_serializer"],
         )
-
-    @staticmethod
-    def value_serializer(data) -> json:
-        """
-        Helper method to serialize data as a JSON
-        :param data:
-        :return: json
-        """
-        return json.dumps(data).encode("utf-8")
 
     def produce(self, data, topic: str):
         """
@@ -33,5 +23,6 @@ class KafkaService(Producer):
         :return:
         """
         data = {"number": data}
+        print(data)
         print(self.client.send(topic, value=data))
         time.sleep(1)
