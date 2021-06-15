@@ -16,16 +16,8 @@ class KafkaService(Consumer):
             auto_offset_reset=config["auto_offset_reset"],
             enable_auto_commit=config["enable_auto_commit"],
             group_id=config["group_id"],
-            value_deserializer=self.value_deserializer,
+            value_deserializer=config["value_deserializer"],
         )
-
-    @staticmethod
-    def value_deserializer(data) -> json:
-        """
-        Helper method to assist in deserialization of recieved message
-        :param data: json
-        """
-        return json.loads(data.decode("utf8"))
 
     def consume(self):
         """
@@ -33,3 +25,4 @@ class KafkaService(Consumer):
         """
         for message in self.client:
             print(f"{message} added")
+            return message
