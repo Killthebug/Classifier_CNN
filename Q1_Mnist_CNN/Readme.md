@@ -17,10 +17,10 @@ $ pip install -r requirements.txt
 ### Using MNIST_CNN
 
 #### Directory Structure : Mnist_CNN
- * [code](./code) : Contrains all code associated with repo
+ * [code](./code) : Contains all code associated with repo
    * [dataloader.py](./code/dataloader.py) : Reads data stored in `../data`
    * [lenet.py](./code/lenet.py) : Model architecture for Lenet CNN
-   * [train.py](./code/train.py) : Train lenet on data loaded from dataloader
+   * [train.py](./code/train.py) : Train Lenet on data loaded from dataloader
    * [infer.py](./code/infer.py) : Loads trained model and infers on new input 
     
  
@@ -33,15 +33,15 @@ $ pip install -r requirements.txt
 * [models](./models) : Saved models are placed in this directory
 
 #### Train and Infer
-To update the data the model is trained on, please change the following variables in `train.py`:\
-`TRAIN_DATA_PATH` : Directory containing training data \
-`TEST_DATA_PATH` : Directory containing test data
+To update the data the model is trained on, please change the following variables in `train.py`:
+* `TRAIN_DATA_PATH` : Directory containing training data 
+* `TEST_DATA_PATH` : Directory containing test data
 
 
-To train and infer follow these steps:
+To train and infer, follow these steps:
 
-Trainstep : `python3 train.py` \
-Inferstep : `python3 infer.py`
+* Trainstep : `python3 train.py` 
+* Inferstep : `python3 infer.py`
 
 ### Dataset Used:
 Link : https://github.com/DeepLenin/fashion-mnist_png
@@ -50,7 +50,6 @@ Link : https://github.com/DeepLenin/fashion-mnist_png
 Train Set : 60,000 \
 Test Set : 10,000 \
 Classes : 10
-
 
 
 **Helper Docs**
