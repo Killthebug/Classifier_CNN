@@ -131,12 +131,30 @@ printing to the console.
 
 > Create 2 topics on said service : T1 & T2
 
-### 
-`python q3_dummy_model_instance.py` : Launches Lenet Model Service \
-`python q3_dummy_producer.py` : Launches Producer that reads from a file and sends request to the Lenet Model\
-`python q3_dummy_consumer.py` : Accepts responses / predictions coming in from the Lenet Service
 
-NOTE : Before launching services it is important to configure Kafka Server Address and Topic Name.
+### Configuration
+Update the following variables before launching the services :
+* In `q3_dummy_producer.py`:
+    * `IMG_PATH` = Path to image file
+    * `PUBLISHER_SERVER` = Server where `T1` Kafka Instance is running
+    * `PUBLISHER_TOPIC` = `T1`
+    
 
-The solution current uses Kafka as a messaging broker but can be shifted to GCP as well.
+* In `q3_dummy_model_instance.py`:
+    * `PUBLISHER_SERVER` = Server where `T2` Kafka Instance is running
+    * `PUBLISHER_TOPIC` = `T2`
+    * `SUBSCRIBER_SERVER` = Server where `T1` Kafka Instance is running
+    * `SUBSCRIBER_TOPIC` = `T1`
+    
+* In `q3_dummy_consumer.py`:
+    * `SUBSCRIBER_SERVER` = Server where `T2` Kafka Instance is running
+    * `SUBSCRIBER_TOPIC` = `T2`
+
+
+### Usage
+
+1. `python q3_dummy_model_instance.py` : Launches Lenet Model Service. This service consumes incoming messages on Topic `T1` and publishes results to Topic `T2`
+2. `python q3_dummy_producer.py` : Launches Producer that reads from a file and publishes message to `T1`
+3. `python q3_dummy_consumer.py` : Consumes messages from Topic `T2` and prints them to the console
+
 
