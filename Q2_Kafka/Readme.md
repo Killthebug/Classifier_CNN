@@ -2,6 +2,20 @@
 
 Build a unified API over Kafka and Google Pub Sub. 
 
+### Table of Contents
+
+* [Q2 Overview](#q2-overview)
+  * [Goal](#goal)
+  * [Installation](#installation)
+  * [Directory Structure](#directory-structure)
+  * [Publisher Service Usage &amp; Config](#publisher-service-usage--config)
+     * [Kafka](#kafka)
+     * [GCP](#gcp)
+  * [Consumer Service Usage &amp; Config](#consumer-service-usage--config)
+     * [Kafka](#kafka-1)
+     * [GCP](#gcp-1)
+
+
 ### Goal
 Build a unified API over Kafka and Google Pub Sub.
 
@@ -21,7 +35,7 @@ $ pip install -r requirements.txt
    * [consumers](./service/consumers) : Contains Kafka and GCP Consumer / Subscriber Interface Class
      * [gcp_service](./service/consumers/gcp_service.py) : GCPService class capable of Consuming from a Google Pub Sub instance
      * [kafka_service](./service/consumers/kafka_service.py) : KafkaService class capable of Consuming from a Kafka instance
-    
+
 ### Publisher Service Usage & Config
 
 #### Kafka 
