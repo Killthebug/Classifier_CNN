@@ -1,19 +1,57 @@
-**Goal:**
+## Q1 : MNIST-CNN
+
+### Goal
 1. Build a multi-class classifier
 2. Library should be trainable on other dataset
 
-**Dataset Used:**
+### Dataset Used:
+Link : https://github.com/DeepLenin/fashion-mnist_png
 
-MNIST Fashion \
+**MNIST Fashion** \
 Train Set : 60,000 \
 Test Set : 10,000 \
 Classes : 10
 
-**Instructions**
 
-_dataloader.py_: Responsible for downloading and transforming data used to train the network.
-If the model is to be trained on new data, please make changes to this file.
+### Installation
+To install required dependencies, follow these steps:
 
-_lenet.py_: File containing the neural network architecture
+Linux and macOS:
+```
+$ pip install -r requirements.txt
+```
 
-_train.py_: Primary script for training the lenet on data loaded via dataloader.py
+
+### Using MNIST_CNN
+
+#### Directory Structure : Mnist_CNN
+ * [code](./code) : Contrains all code associated with repo
+   * [dataloader.py](./dir2/file21.ext) : Reads data stored in `../data`
+   * [lenet.py](./dir2/file22.ext) : Model architecture for Lenet CNN
+   * [train.py](./dir2/file23.ext) : Train lenet on data loaded from dataloader
+   * [infer.py](./code/infer.py) : Loads trained model and infers on new input 
+    
+ 
+   * [data](./data) : FMNIST data is placed here
+       * [f_mnist_data](./dir1/file11.ext) : Place MNIST data set here
+            *  [test](./dir1/file12.ext) : Place test data here. Each sub-directory in this directory contains images associated with a particular label
+            *  [train](./dir1/file12.ext) : Place train data here. Each sub-directory in this directory contains images associated with a particular label
+
+
+   * [models](./models) : Saved models are placed in this directory
+
+#### Train and Infer
+To update the data the model is trained on, please change the following variables in `train.py`:\
+`TRAIN_DATA_PATH` : Directory containing training data \
+`TEST_DATA_PATH` : Directory containing test data
+
+
+To train and infer follow these steps:
+
+Trainstep : `python3 train.py` \
+Inferstep : `python3 infer.py`
+
+
+**Helper Docs**
+
+https://towardsdatascience.com/understanding-and-implementing-lenet-5-cnn-architecture-deep-learning-a2d531ebc342
