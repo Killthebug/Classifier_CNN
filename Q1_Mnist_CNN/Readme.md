@@ -4,14 +4,6 @@
 1. Build a multi-class classifier
 2. Library should be trainable on other dataset
 
-### Dataset Used:
-Link : https://github.com/DeepLenin/fashion-mnist_png
-
-**MNIST Fashion** \
-Train Set : 60,000 \
-Test Set : 10,000 \
-Classes : 10
-
 
 ### Installation
 To install required dependencies, follow these steps:
@@ -26,19 +18,19 @@ $ pip install -r requirements.txt
 
 #### Directory Structure : Mnist_CNN
  * [code](./code) : Contrains all code associated with repo
-   * [dataloader.py](./dir2/file21.ext) : Reads data stored in `../data`
-   * [lenet.py](./dir2/file22.ext) : Model architecture for Lenet CNN
-   * [train.py](./dir2/file23.ext) : Train lenet on data loaded from dataloader
+   * [dataloader.py](./code/dataloader.py) : Reads data stored in `../data`
+   * [lenet.py](./code/lenet.py) : Model architecture for Lenet CNN
+   * [train.py](./code/train.py) : Train lenet on data loaded from dataloader
    * [infer.py](./code/infer.py) : Loads trained model and infers on new input 
     
  
-   * [data](./data) : FMNIST data is placed here
-       * [f_mnist_data](./dir1/file11.ext) : Place MNIST data set here
-            *  [test](./dir1/file12.ext) : Place test data here. Each sub-directory in this directory contains images associated with a particular label
-            *  [train](./dir1/file12.ext) : Place train data here. Each sub-directory in this directory contains images associated with a particular label
+* [data](./data) : FMNIST data is placed here
+  * [f_mnist_data](./data/f_mnist_data) : Place MNIST data set here
+    *  [test](./data/f_mnist_data/test) : Place test data here. Each sub-directory in this directory contains images associated with a particular label
+    *  [train](./data/f_mnist_data/train) : Place train data here. Each sub-directory in this directory contains images associated with a particular label
 
 
-   * [models](./models) : Saved models are placed in this directory
+* [models](./models) : Saved models are placed in this directory
 
 #### Train and Infer
 To update the data the model is trained on, please change the following variables in `train.py`:\
@@ -50,6 +42,15 @@ To train and infer follow these steps:
 
 Trainstep : `python3 train.py` \
 Inferstep : `python3 infer.py`
+
+### Dataset Used:
+Link : https://github.com/DeepLenin/fashion-mnist_png
+
+**MNIST Fashion** \
+Train Set : 60,000 \
+Test Set : 10,000 \
+Classes : 10
+
 
 
 **Helper Docs**
