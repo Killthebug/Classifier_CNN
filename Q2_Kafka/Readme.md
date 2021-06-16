@@ -4,16 +4,24 @@ Build a unified API over Kafka and Google Pub Sub.
 
 ### Table of Contents
 
-* [Q2 Overview](#q2-overview)
-  * [Goal](#goal)
-  * [Installation](#installation)
-  * [Directory Structure](#directory-structure)
-  * [Publisher Service Usage &amp; Config](#publisher-service-usage--config)
-     * [Kafka](#kafka)
-     * [GCP](#gcp)
-  * [Consumer Service Usage &amp; Config](#consumer-service-usage--config)
-     * [Kafka](#kafka-1)
-     * [GCP](#gcp-1)
+
+   * [Q2 Overview](#q2-overview)
+      * [Table of Contents](#table-of-contents)
+      * [Goal](#goal)
+      * [Installation](#installation)
+      * [Directory Structure](#directory-structure)
+      * [Publisher Service Usage &amp; Config](#publisher-service-usage--config)
+         * [Kafka](#kafka)
+         * [GCP](#gcp)
+      * [Consumer Service Usage &amp; Config](#consumer-service-usage--config)
+         * [Kafka](#kafka-1)
+         * [GCP](#gcp-1)
+   * [Q3 Overview](#q3-overview)
+      * [Goal](#goal-1)
+      * [Pre-requisites](#pre-requisites)
+      * [Configuration](#configuration)
+      * [Usage](#usage)
+
 
 
 ### Goal
